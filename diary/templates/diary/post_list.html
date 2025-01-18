@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Keiji diary</title>
-    </head>
+{% extends 'diary/base.html' %}
 
-    <body>
-        <header>
-            <h1><a href="/">Keiji Diary</a></h1>
-        </header>
-
-        {% for post in posts %}
-            <article>
-                <time>published: {{ post.published_date }}</time>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </article>
-        {% endfor %}
-    </body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <time>published: {{ post.published_date }}</time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
